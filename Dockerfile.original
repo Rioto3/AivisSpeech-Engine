@@ -129,21 +129,6 @@ set -eux
 exec "\$@"
 EOF
 
-
-# ====== [追加ここから] ======
-# モデル格納ディレクトリを作成（Logs含む）
-RUN mkdir -p /home/user/.local/share/AivisSpeech-Engine-Dev/{Models,Logs}
-
-# ローカルに ./local_models/ ディレクトリを用意しておくこと
-COPY ./local_models/*.aivmx /home/user/.local/share/AivisSpeech-Engine-Dev/Models/
-
-# 所有者とパーミッション調整（gosu user実行のため）
-RUN chown -R user:user /home/user/.local/share/AivisSpeech-Engine-Dev && \
-    chmod -R 755 /home/user/.local/share/AivisSpeech-Engine-Dev
-
-# ====== [追加ここまで] ======
-
-
 ENTRYPOINT [ "/entrypoint.sh"  ]
 CMD [ "gosu", "user", "/opt/python/bin/poetry", "run", "python", "./run.py", "--host", "0.0.0.0" ]
 

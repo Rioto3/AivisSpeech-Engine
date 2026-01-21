@@ -159,3 +159,8 @@ cython_debug/
 ._*
 
 *.wav
+
+# --- BEGIN spinning local ignore rules ---
+local_models/
+*.aivmx
+# --- END spinning local ignore rules ---
